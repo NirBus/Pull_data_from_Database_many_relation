@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Pull_data_from_Database_many_relation.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +19,11 @@ namespace Pull_data_from_Database_many_relation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<AppDbContext>(opt =>
+            {
+                opt.UseSqlServer("Server= DESKTOP-QHHB50J;Database = BussinessTask;Trusted_Connection = true; Integrated Security = true");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
